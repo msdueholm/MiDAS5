@@ -164,7 +164,6 @@ df <- amp_subset_samples(d4n, Primary_substrate %in% c("Food waste","Industrial"
 df <- amp_subset_samples(df, Temperature_range %in% c("Thermophilic", "Mesophilic"))       
 df <- amp_subset_taxa(df, tax_vector = c("k__Archaea"), normalise = FALSE)
 df <- normaliseTo100(df)
-df <- amp_subset_taxa(df, tax_vector = c("g__Methanothermobacter"), normalise = FALSE)
 
 # Group unclassified species and genera
 df$tax$Species <- if_else(df$tax$Species =="","s__Unclassified",df$tax$Species)
@@ -172,10 +171,10 @@ df$tax$Genus <- if_else(df$tax$Genus =="","g__Unclassified",df$tax$Genus)
 
 # Create heatmap for primary substrates and temperature range
 df1 <- amp_heatmap(df,
-            group_by = "SampleID",
-            tax_aggregate = "OTU",
+            group_by = "TempSubstrate",
+            tax_aggregate = "Genus",
             measure = "mean",
-            tax_show = 50,
+            tax_show = 20,
             showRemainingTaxa = TRUE,
             tax_empty ="OTU",
             normalise = FALSE,
