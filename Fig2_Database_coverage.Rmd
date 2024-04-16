@@ -1,7 +1,7 @@
 ---
 title: "Figure 2: MiDAS5 database evaluation"
 author: "Morten K. D. Dueholm"
-date: "2022-04-05"
+date: "2023-12-28"
 ---
 
 ## R-packages
@@ -28,15 +28,21 @@ read_amp_mappings <- function(input) {
   map <- map[order(, readr::parse_number(ASV))]}
 
 ### Read mapping results for V1-V3
-a <- read_amp_mappings("data/V13ASV_vs_GTDB_ssu_r202.b6")
-b <- read_amp_mappings("data/V13ASV_vs_SILVA_138.1_SSURef_NR99.b6")
-c <- read_amp_mappings("data/V13ASV_vs_MiDAS_4.8.1.b6")
-d <- read_amp_mappings("data/V13ASV_vs_MiDAS_5.0.b6")
+a <- read_amp_mappings("data/V13_ASV_vs_GTDB_bac120_ssu_reps_r214.b6")
+b <- read_amp_mappings("data/V13_ASV_vs_GTDB_ssu_all_r214.b6")
+c <- read_amp_mappings("data/V13_ASV_vs_GreenGenes2_2022_10.b6")
+d <- read_amp_mappings("data/V13_ASV_vs_GreenGenes2_2022_10_seqs.b6")
+e <- read_amp_mappings("data/V13_ASV_vs_SILVA_138.1_SSURef_NR99.b6")
+f <- read_amp_mappings("data/V13_ASV_vs_MiDAS_4.8.1.b6")
+g <- read_amp_mappings("data/V13_ASV_vs_MiDAS_5.2.b6 ")
 
 # Merge all the mappings into a single data.table, sort it by ASV number, and remove NA's.
 merged_map <- merge.data.table(a, b, by="ASV", all=TRUE)
 merged_map <- merge.data.table(merged_map, c, by="ASV", all=TRUE)
 merged_map <- merge.data.table(merged_map, d, by="ASV", all=TRUE)
+merged_map <- merge.data.table(merged_map, e, by="ASV", all=TRUE)
+merged_map <- merge.data.table(merged_map, f, by="ASV", all=TRUE)
+merged_map <- merge.data.table(merged_map, g, by="ASV", all=TRUE)
 merged_map <- merged_map[order(, readr::parse_number(ASV))]
 merged_map[is.na(merged_map)] <- 0
 
@@ -73,15 +79,21 @@ Summary_V13 <- r_V13[, .("Mean"=mean(Hits),
               by=.(Database)][,Primer:="V1-V3"]
 
 ### Read mapping results for V4
-a <- read_amp_mappings("data/V4ASV_vs_GTDB_ssu_r202.b6")
-b <- read_amp_mappings("data/V4ASV_vs_SILVA_138.1_SSURef_NR99.b6")
-c <- read_amp_mappings("data/V4ASV_vs_MiDAS_4.8.1.b6")
-d <- read_amp_mappings("data/V4ASV_vs_MiDAS_5.0.b6")
+a <- read_amp_mappings("data/V4_ASV_vs_GTDB_bac120_ssu_reps_r214.b6")
+b <- read_amp_mappings("data/V4_ASV_vs_GTDB_ssu_all_r214.b6")
+c <- read_amp_mappings("data/V4_ASV_vs_GreenGenes2_2022_10.b6")
+d <- read_amp_mappings("data/V4_ASV_vs_GreenGenes2_2022_10_seqs.b6")
+e <- read_amp_mappings("data/V4_ASV_vs_SILVA_138.1_SSURef_NR99.b6")
+f <- read_amp_mappings("data/V4_ASV_vs_MiDAS_4.8.1.b6")
+g <- read_amp_mappings("data/V4_ASV_vs_MiDAS_5.2.b6 ")
 
 # Merge all the mappings into a single data.table, sort it by ASV number, and remove NA's.
 merged_map <- merge.data.table(a, b, by="ASV", all=TRUE)
 merged_map <- merge.data.table(merged_map, c, by="ASV", all=TRUE)
 merged_map <- merge.data.table(merged_map, d, by="ASV", all=TRUE)
+merged_map <- merge.data.table(merged_map, e, by="ASV", all=TRUE)
+merged_map <- merge.data.table(merged_map, f, by="ASV", all=TRUE)
+merged_map <- merge.data.table(merged_map, g, by="ASV", all=TRUE)
 merged_map <- merged_map[order(, readr::parse_number(ASV))]
 merged_map[is.na(merged_map)] <- 0
 
@@ -118,15 +130,21 @@ Summary_V4 <- r_V4[, .("Mean"=mean(Hits),
               by=.(Database)][,Primer:="V4"]
 
 ### Read mapping results for V3-V5 reverse
-a <- read_amp_mappings("data/V35_reverse_250bp_ASV_vs_GTDB_ssu_r202.b6")
-b <- read_amp_mappings("data/V35_reverse_250bp_ASV_vs_SILVA_138.1_SSURef_NR99.b6")
-c <- read_amp_mappings("data/V35_reverse_250bp_ASV_vs_MiDAS_4.8.1.b6")
-d <- read_amp_mappings("data/V35_reverse_250bp_ASV_vs_MiDAS_5.0.b6")
+a <- read_amp_mappings("data/V35_ASV_vs_GTDB_bac120_ssu_reps_r214.b6")
+b <- read_amp_mappings("data/V35_ASV_vs_GTDB_ssu_all_r214.b6")
+c <- read_amp_mappings("data/V35_ASV_vs_GreenGenes2_2022_10.b6")
+d <- read_amp_mappings("data/V35_ASV_vs_GreenGenes2_2022_10_seqs.b6")
+e <- read_amp_mappings("data/V35_ASV_vs_SILVA_138.1_SSURef_NR99.b6")
+f <- read_amp_mappings("data/V35_ASV_vs_MiDAS_4.8.1.b6")
+g <- read_amp_mappings("data/V35_ASV_vs_MiDAS_5.2.b6 ")
 
 # Merge all the mappings into a single data.table, sort it by ASV number, and remove NA's.
 merged_map <- merge.data.table(a, b, by="ASV", all=TRUE)
 merged_map <- merge.data.table(merged_map, c, by="ASV", all=TRUE)
 merged_map <- merge.data.table(merged_map, d, by="ASV", all=TRUE)
+merged_map <- merge.data.table(merged_map, e, by="ASV", all=TRUE)
+merged_map <- merge.data.table(merged_map, f, by="ASV", all=TRUE)
+merged_map <- merge.data.table(merged_map, g, by="ASV", all=TRUE)
 merged_map <- merged_map[order(, readr::parse_number(ASV))]
 merged_map[is.na(merged_map)] <- 0
 
@@ -183,7 +201,7 @@ p1 <- ggplot(data=r, aes(x=Database, y=Hits, fill=Database)) +
   facet_grid(~Primer) +
   theme(axis.text.x = element_text(angle = 90, vjust=0.5, hjust = 1))
 
-rm(df, df_long, a,b,c,d,e,f,g,merged_map,r,r0001,r001,r01)
+rm(df, df_long, a,b,c,d,e,f,g,merged_map,r)
 ```
 
 ## Create classification graphs for genera
@@ -204,13 +222,16 @@ read_amp_classifications <- function(input) {
 
 ### V1-V3
 # Read classifications 
-a2 <- read_amp_classifications("data/V13ASV_vs_GTDB_ssu_r202.sintax")
-b2 <- read_amp_classifications("data/V13ASV_vs_SILVA_138.1_SSURef_NR99.sintax")
-c2 <- read_amp_classifications("data/V13ASV_vs_MiDAS_4.8.1.sintax")
-d2 <- read_amp_classifications("data/V13ASV_vs_MiDAS_5.0.sintax")
+a2 <- read_amp_classifications("data/V13_ASV_vs_GTDB_bac120_ssu_reps_r214.sintax")
+b2 <- read_amp_classifications("data/V13_ASV_vs_GTDB_ssu_all_r214.sintax")
+c2 <- read_amp_classifications("data/V13_ASV_vs_GreenGenes2_2022_10.sintax")
+d2 <- read_amp_classifications("data/V13_ASV_vs_GreenGenes2_2022_10_seqs.sintax")
+e2 <- read_amp_classifications("data/V13_ASV_vs_SILVA_138.1_SSURef_NR99.sintax")
+f2 <- read_amp_classifications("data/V13_ASV_vs_MiDAS_4.8.1.sintax")
+g2 <- read_amp_classifications("data/V13_ASV_vs_MiDAS_5.2.sintax")
 
 #Merge data into one data-table
-merged_map2 <- rbind.data.frame(a2,b2,c2,d2)
+merged_map2 <- rbind.data.frame(a2,b2,c2,d2,e2,f2,g2)
 
 #Separate the taxonomy in ranks
 merged_map2 <- merged_map2[,c("K","P","C","O","F","G","S") := tstrsplit(V4, ",", fixed=TRUE)]
@@ -256,13 +277,16 @@ Summary2_V13 <- rc_V13[,.("Mean"=mean(Classified),
 
 ### V4
 # Read classifications 
-a2 <- read_amp_classifications("data/V4ASV_vs_GTDB_ssu_r202.sintax")
-b2 <- read_amp_classifications("data/V4ASV_vs_SILVA_138.1_SSURef_NR99.sintax")
-c2 <- read_amp_classifications("data/V4ASV_vs_MiDAS_4.8.1.sintax")
-d2 <- read_amp_classifications("data/V4ASV_vs_MiDAS_5.0.sintax")
+a2 <- read_amp_classifications("data/V4_ASV_vs_GTDB_bac120_ssu_reps_r214.sintax")
+b2 <- read_amp_classifications("data/V4_ASV_vs_GTDB_ssu_all_r214.sintax")
+c2 <- read_amp_classifications("data/V4_ASV_vs_GreenGenes2_2022_10.sintax")
+d2 <- read_amp_classifications("data/V4_ASV_vs_GreenGenes2_2022_10_seqs.sintax")
+e2 <- read_amp_classifications("data/V4_ASV_vs_SILVA_138.1_SSURef_NR99.sintax")
+f2 <- read_amp_classifications("data/V4_ASV_vs_MiDAS_4.8.1.sintax")
+g2 <- read_amp_classifications("data/V4_ASV_vs_MiDAS_5.2.sintax")
 
 #Merge data into one data-table
-merged_map2 <- rbind.data.frame(a2,b2,c2,d2)
+merged_map2 <- rbind.data.frame(a2,b2,c2,d2,e2,f2,g2)
 
 #Separate the taxonomy in ranks
 merged_map2 <- merged_map2[,c("K","P","C","O","F","G","S") := tstrsplit(V4, ",", fixed=TRUE)]
@@ -307,13 +331,16 @@ Summary2_V4 <- rc_V4[,.("Mean"=mean(Classified),
 
 ### V35
 # Read classifications 
-a2 <- read_amp_classifications("data/V35_reverse_250bp_ASV_vs_GTDB_ssu_r202.sintax")
-b2 <- read_amp_classifications("data/V35_reverse_250bp_ASV_vs_SILVA_138.1_SSURef_NR99.sintax")
-c2 <- read_amp_classifications("data/V35_reverse_250bp_ASV_vs_MiDAS_4.8.1.sintax")
-d2 <- read_amp_classifications("data/V35_reverse_250bp_ASV_vs_MiDAS_5.0.sintax")
+a2 <- read_amp_classifications("data/V35_ASV_vs_GTDB_bac120_ssu_reps_r214.sintax")
+b2 <- read_amp_classifications("data/V35_ASV_vs_GTDB_ssu_all_r214.sintax")
+c2 <- read_amp_classifications("data/V35_ASV_vs_GreenGenes2_2022_10.sintax")
+d2 <- read_amp_classifications("data/V35_ASV_vs_GreenGenes2_2022_10_seqs.sintax")
+e2 <- read_amp_classifications("data/V35_ASV_vs_SILVA_138.1_SSURef_NR99.sintax")
+f2 <- read_amp_classifications("data/V35_ASV_vs_MiDAS_4.8.1.sintax")
+g2 <- read_amp_classifications("data/V35_ASV_vs_MiDAS_5.2.sintax")
 
 #Merge data into one data-table
-merged_map2 <- rbind.data.frame(a2,b2,c2,d2)
+merged_map2 <- rbind.data.frame(a2,b2,c2,d2,e2,f2,g2)
 
 #Separate the taxonomy in ranks
 merged_map2 <- merged_map2[,c("K","P","C","O","F","G","S") := tstrsplit(V4, ",", fixed=TRUE)]
@@ -363,7 +390,13 @@ Summary2 <- rbind(Summary2, Summary2_V35)
 #Combine mapping results
 rc <- rbind(rc_V13, rc_V4)
 rc <- rbind(rc, rc_V35)
-rc <- rc[, Database:=factor(Database, levels=c("GTDB_ssu_r202","SILVA_138.1_SSURef_NR99","MiDAS_4.8.1","MiDAS_5.0"))]
+rc <- rc[, Database:=factor(Database, levels=c("GTDB_bac120_ssu_reps_r214",
+                                               "GTDB_ssu_all_r214",
+                                               "GreenGenes2_2022_10",
+                                               "GreenGenes2_2022_10_seqs",
+                                               "SILVA_138.1_SSURef_NR99",
+                                               "MiDAS_4.8.1",
+                                               "MiDAS_5.2"))]
 
 
 #Print summary for genus level classfication 
@@ -383,20 +416,23 @@ p2 <- ggplot(data=rc, aes(x=Database, y=Classified, fill=Database)) +
   facet_grid(~Primer) +
   theme(axis.text.x = element_text(angle = 90, vjust=0.5, hjust = 1))
 
-rm(df2, df_long2,merged_map2,rc,r0001c,r001c,r01c)
+rm(df2, df_long2,merged_map2,rc)
 ```
 
 ## Create classification graphs for species
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 ### V13
 # Read classifications 
-a2 <- read_amp_classifications("data/V13ASV_vs_GTDB_ssu_r202.sintax")
-b2 <- read_amp_classifications("data/V13ASV_vs_SILVA_138.1_SSURef_NR99.sintax")
-c2 <- read_amp_classifications("data/V13ASV_vs_MiDAS_4.8.1.sintax")
-d2 <- read_amp_classifications("data/V13ASV_vs_MiDAS_5.0.sintax")
+a2 <- read_amp_classifications("data/V13_ASV_vs_GTDB_bac120_ssu_reps_r214.sintax")
+b2 <- read_amp_classifications("data/V13_ASV_vs_GTDB_ssu_all_r214.sintax")
+c2 <- read_amp_classifications("data/V13_ASV_vs_GreenGenes2_2022_10.sintax")
+d2 <- read_amp_classifications("data/V13_ASV_vs_GreenGenes2_2022_10_seqs.sintax")
+e2 <- read_amp_classifications("data/V13_ASV_vs_SILVA_138.1_SSURef_NR99.sintax")
+f2 <- read_amp_classifications("data/V13_ASV_vs_MiDAS_4.8.1.sintax")
+g2 <- read_amp_classifications("data/V13_ASV_vs_MiDAS_5.2.sintax")
 
-#Summarize data
-merged_map3 <- rbind.data.frame(a2,b2,c2,d2)
+#Merge data into one data-table
+merged_map3 <- rbind.data.frame(a2,b2,c2,d2,e2,f2,g2)
 merged_map3 <- merged_map3[,c("K","P","C","O","F","G","S") := tstrsplit(V4, ",", fixed=TRUE)]
 
 #Remove unused columns
@@ -440,13 +476,16 @@ Summary3_V13 <- rc2_V13[,.("Mean"=mean(Classified),
 
 ### V4
 # Read classifications 
-a2 <- read_amp_classifications("data/V4ASV_vs_GTDB_ssu_r202.sintax")
-b2 <- read_amp_classifications("data/V4ASV_vs_SILVA_138.1_SSURef_NR99.sintax")
-c2 <- read_amp_classifications("data/V4ASV_vs_MiDAS_4.8.1.sintax")
-d2 <- read_amp_classifications("data/V4ASV_vs_MiDAS_5.0.sintax")
+a2 <- read_amp_classifications("data/V4_ASV_vs_GTDB_bac120_ssu_reps_r214.sintax")
+b2 <- read_amp_classifications("data/V4_ASV_vs_GTDB_ssu_all_r214.sintax")
+c2 <- read_amp_classifications("data/V4_ASV_vs_GreenGenes2_2022_10.sintax")
+d2 <- read_amp_classifications("data/V4_ASV_vs_GreenGenes2_2022_10_seqs.sintax")
+e2 <- read_amp_classifications("data/V4_ASV_vs_SILVA_138.1_SSURef_NR99.sintax")
+f2 <- read_amp_classifications("data/V4_ASV_vs_MiDAS_4.8.1.sintax")
+g2 <- read_amp_classifications("data/V4_ASV_vs_MiDAS_5.2.sintax")
 
-#Summarize data
-merged_map3 <- rbind.data.frame(a2,b2,c2,d2)
+#Merge data into one data-table
+merged_map3 <- rbind.data.frame(a2,b2,c2,d2,e2,f2,g2)
 merged_map3 <- merged_map3[,c("K","P","C","O","F","G","S") := tstrsplit(V4, ",", fixed=TRUE)]
 
 #Remove unused columns
@@ -490,13 +529,16 @@ Summary3_V4 <- rc2_V4[,.("Mean"=mean(Classified),
 
 ### V35
 # Read classifications 
-a2 <- read_amp_classifications("data/V35_reverse_250bp_ASV_vs_GTDB_ssu_r202.sintax")
-b2 <- read_amp_classifications("data/V35_reverse_250bp_ASV_vs_SILVA_138.1_SSURef_NR99.sintax")
-c2 <- read_amp_classifications("data/V35_reverse_250bp_ASV_vs_MiDAS_4.8.1.sintax")
-d2 <- read_amp_classifications("data/V35_reverse_250bp_ASV_vs_MiDAS_5.0.sintax")
+a2 <- read_amp_classifications("data/V35_ASV_vs_GTDB_bac120_ssu_reps_r214.sintax")
+b2 <- read_amp_classifications("data/V35_ASV_vs_GTDB_ssu_all_r214.sintax")
+c2 <- read_amp_classifications("data/V35_ASV_vs_GreenGenes2_2022_10.sintax")
+d2 <- read_amp_classifications("data/V35_ASV_vs_GreenGenes2_2022_10_seqs.sintax")
+e2 <- read_amp_classifications("data/V35_ASV_vs_SILVA_138.1_SSURef_NR99.sintax")
+f2 <- read_amp_classifications("data/V35_ASV_vs_MiDAS_4.8.1.sintax")
+g2 <- read_amp_classifications("data/V35_ASV_vs_MiDAS_5.2.sintax")
 
-#Summarize data
-merged_map3 <- rbind.data.frame(a2,b2,c2,d2)
+#Merge data into one data-table
+merged_map3 <- rbind.data.frame(a2,b2,c2,d2,e2,f2,g2)
 merged_map3 <- merged_map3[,c("K","P","C","O","F","G","S") := tstrsplit(V4, ",", fixed=TRUE)]
 
 #Remove unused columns
@@ -544,7 +586,13 @@ Summary3 <- rbind(Summary3, Summary3_V35)
 #Combine mapping results
 rc2 <- rbind(rc2_V13, rc2_V4)
 rc2 <- rbind(rc2, rc2_V35)
-rc2 <- rc2[, Database:=factor(Database, levels=c("GTDB_ssu_r202","SILVA_138.1_SSURef_NR99","MiDAS_4.8.1","MiDAS_5.0"))]
+rc2 <- rc2[, Database:=factor(Database, levels=c("GTDB_bac120_ssu_reps_r214",
+                                               "GTDB_ssu_all_r214",
+                                               "GreenGenes2_2022_10",
+                                               "GreenGenes2_2022_10_seqs",
+                                               "SILVA_138.1_SSURef_NR99",
+                                               "MiDAS_4.8.1",
+                                               "MiDAS_5.2"))]
 
 write.csv2(Summary3, file="output/Species_classification_summary_V4.txt", row.names=FALSE, quote=FALSE)
 

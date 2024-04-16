@@ -1,13 +1,13 @@
 ---
 title: "Figure 3: Primer coverage"
 author: "Morten K. D. Dueholm"
-date: "2022-05-02"
+date: "2024-02-26"
 ---
   
   #Load packages
 ```{r load_packages, message=FALSE, warning=FALSE, echo=FALSE, include=FALSE}
 library(tidyverse)
-library(ggtree)
+#library(ggtree)
 library(patchwork)
 ```
 

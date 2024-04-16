@@ -1,7 +1,7 @@
 ---
 title: "Figure 1: World map and WWTP metadata"
 author: "Morten K. D. Dueholm"
-date: "2022-04-01"
+date: "2023-12-20"
 ---
 
 # Load packages
@@ -13,7 +13,7 @@ library(patchwork)
 
 # Load data
 ```{r message=FALSE, warning=TRUE, include=FALSE}
-df <- read.csv("data/DataS1_AD_metadata_220401.txt", sep="\t")
+df <- read.csv("data/DataS1_AD_metadata_231220.txt", sep="\t")
 df[df==""]<-NA
 df <- mutate(df, Primary_substrate = fct_other(Primary_substrate, keep = c("Food waste","Industrial","Manure","Wastewater sludge", "Other")))
 df$Primary_substrate[is.na(df$Primary_substrate)] <- "Other"
@@ -71,7 +71,7 @@ Summary_Temperature_range <- df %>%
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 p1 <- ggplot(Summary_Primary_substrate, aes(x=Primary_substrate, y=Percent)) +
   theme_bw() +
-  geom_bar(color="black", stat="identity",position = "identity", width=0.8, fill="#66c2a5") +
+  geom_bar(color="black", stat="identity",position = "identity", width=0.8, fill="#C1272D") +
   geom_text(aes(x=Primary_substrate, y=Percent+5, label=Counts)) +
   theme(axis.text.x = element_text(angle = 90, vjust=0.5, hjust = 1)) +
   ylab("Primary substrate (%)") +
@@ -82,7 +82,7 @@ p1 <- ggplot(Summary_Primary_substrate, aes(x=Primary_substrate, y=Percent)) +
 
 p2 <- ggplot(Summary_Technology, aes(x=Digester_technology, y=Percent)) +
   theme_bw() +
-  geom_bar(color="black", stat="identity",position = "identity", width=0.8, fill="#fc8d62") +
+  geom_bar(color="black", stat="identity",position = "identity", width=0.8, fill="#C1272D") +
   geom_text(aes(x=Digester_technology, y=Percent+5, label=Counts)) +
   theme(axis.text.x = element_text(angle = 90, vjust=0.5, hjust = 1)) +
   ylab("Digester technolgy (%)") +
@@ -93,7 +93,7 @@ p2 <- ggplot(Summary_Technology, aes(x=Digester_technology, y=Percent)) +
 
 p3 <- ggplot(Summary_Temperature_range, aes(x=Temperature_range, y=Percent)) +
   theme_bw() +
-  geom_bar(color="black", stat="identity",position = "identity", width=0.8, fill="#8da0cb") +
+  geom_bar(color="black", stat="identity",position = "identity", width=0.8, fill="#C1272D") +
   geom_text(aes(x=Temperature_range, y=Percent+5, label=Counts)) +
   theme(axis.text.x = element_text(angle = 90, vjust=0.5, hjust = 1)) +
   ylab("Temperature range (%)") +
@@ -102,9 +102,9 @@ p3 <- ggplot(Summary_Temperature_range, aes(x=Temperature_range, y=Percent)) +
   theme(legend.position = "none") +
   coord_flip()
 
-p <- p1 + p2 + p3 + plot_spacer() + plot_layout(ncol=2)
+p <- p1 + p2 + p3 + plot_spacer() + plot_layout(ncol=1)
 
-ggsave(filename="output/Figure1b.pdf", plot=p, width=10, height=4, useDingbats=FALSE, limitsize=FALSE)
+ggsave(filename="output/Figure1b.pdf", plot=p, width=6, height=8, useDingbats=FALSE, limitsize=FALSE)
 ```
 
 # Create summary for ammonium concentrations
